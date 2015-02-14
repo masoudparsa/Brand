@@ -98,7 +98,11 @@ public class MainActivity extends ActionBarActivity {
         List<Advertise> advertiseList=  advertiseBusiness.getAdvertisesByBrandId(1);
 
         TextView textView2= (TextView) findViewById(R.id.MainText2);
-        textView2.setText(advertiseList.get(0).name);
+        try {
+            textView2.setText(advertiseList.get(0).name);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
 
