@@ -1,10 +1,13 @@
 package com.rayweb.brand;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.rayweb.brand.Business.AdvertiseBusiness;
@@ -103,14 +106,25 @@ public class MainActivity extends ActionBarActivity {
         }catch(Exception e){
             e.printStackTrace();
         }
+
+        Button button = (Button) findViewById(R.id.btn1);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,SettingsActivity.class);
+                MainActivity.this.startActivity(intent);
+            }
+        });
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(1,1,1,"تنظیمات").setIcon(android.R.drawable.ic_menu_preferences);
+        return super.onCreateOptionsMenu(menu);
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
+//        return true;
     }
 
     @Override
@@ -121,10 +135,21 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+        switch(id){
+            case 1 :
+                Intent settingIntent = new Intent(MainActivity.this,SettingsActivity.class);
+                MainActivity.this.startActivity(settingIntent);
+                break;
+            case 2 :
+                Intent aboutIntent = new Intent(MainActivity.this,AboutActivity.class);
+                MainActivity.this.startActivity(aboutIntent);
+                break;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
 }
