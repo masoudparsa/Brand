@@ -16,6 +16,7 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.text.TextUtils;
+import android.widget.Toast;
 
 
 import java.util.List;
@@ -216,8 +217,17 @@ public class SettingsActivity extends PreferenceActivity {
             // guidelines.
             bindPreferenceSummaryToValue(findPreference("example_text"));
             bindPreferenceSummaryToValue(findPreference("example_list"));
+            findPreference("example_text").setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    Toast.makeText(Global.context,"نام شما ذخیره شد",Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+            });
         }
     }
+
+
 
     /**
      * This fragment shows notification preferences only. It is used when the
@@ -255,5 +265,9 @@ public class SettingsActivity extends PreferenceActivity {
             // guidelines.
             bindPreferenceSummaryToValue(findPreference("sync_frequency"));
         }
+
     }
+
+
+
 }

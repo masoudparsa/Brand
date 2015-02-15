@@ -115,12 +115,22 @@ public class MainActivity extends ActionBarActivity {
                 MainActivity.this.startActivity(intent);
             }
         });
+
+        TextView textView = (TextView) findViewById(R.id.MainText2);
+        try {
+            String full_name = Global.preferences.getString("example_text", "Full Name");
+            textView.setText(full_name);
+        }catch(NullPointerException e){
+            e.printStackTrace();
+        }
+
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(1,1,1,"تنظیمات").setIcon(android.R.drawable.ic_menu_preferences);
+        menu.add(1,2,2,"درباره برندز").setIcon(android.R.drawable.ic_menu_info_details);
         return super.onCreateOptionsMenu(menu);
         // Inflate the menu; this adds items to the action bar if it is present.
 //        getMenuInflater().inflate(R.menu.menu_main, menu);
