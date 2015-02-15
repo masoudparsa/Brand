@@ -44,9 +44,7 @@ public class JsonHelper {
     {
         try
         {
-            
-
-            return gson.fromJson(json,type);
+             return gson.fromJson(json,type);
         }
         catch (Exception e)
         {

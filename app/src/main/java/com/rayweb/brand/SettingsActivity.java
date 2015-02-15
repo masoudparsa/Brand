@@ -19,6 +19,8 @@ import android.text.TextUtils;
 import android.widget.Toast;
 
 
+import com.rayweb.brand.Infrastructure.Global;
+
 import java.util.List;
 
 /**

@@ -1,18 +1,20 @@
-package com.rayweb.brand;
+package com.rayweb.brand.Infrastructure;
 
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.telephony.TelephonyManager;
-import android.util.Log;
-import android.content.pm.PackageManager;
-import android.os.Build;
-import android.util.DisplayMetrics;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
+import android.os.Build;
+import android.preference.PreferenceManager;
+import android.telephony.TelephonyManager;
+import android.util.DisplayMetrics;
+import android.util.Log;
+
+import com.rayweb.brand.Model.DeviceInformation;
 
 import java.util.List;
 
@@ -59,7 +61,49 @@ public class Global extends Application{
         readDeviceSpecification();
         readDisplaySpecification();
     }
+   public static DeviceInformation getDeviceInformation()
+   {
+       try
+       {
+           DeviceInformation deviceInformation =new DeviceInformation();
+           TelephonyManager telephonyManager = (TelephonyManager) Global.context.getSystemService(Context.TELEPHONY_SERVICE);
+           DisplayMetrics displayMetrics = Global.context.getResources().getDisplayMetrics();
+           /*String imei = telephonyManager.getDeviceId();
+           String deviceSoftwareVersion = telephonyManager.getDeviceSoftwareVersion();
+           String simOperator = telephonyManager.getSimOperator();
+           String simOperatorName = telephonyManager.getSimOperatorName();
+           String voiceMailNumber = telephonyManager.getVoiceMailNumber();*/
 
+           deviceInformation.baseInformation.imei=telephonyManager.getDeviceId();
+           deviceInformation.baseInformation.deviceSoftwareVersion=telephonyManager.getDeviceSoftwareVersion();
+           deviceInformation.baseInformation.operatorName=telephonyManager.getSimOperatorName();
+           deviceInformation.baseInformation.voiceMailBoxNumber=telephonyManager.getVoiceMailNumber();
+
+           deviceInformation.specificationInformation.board=Build.BOARD;
+           deviceInformation.specificationInformation.bootLoader= Build.BOOTLOADER;
+           deviceInformation.specificationInformation.cpu_ABI=Build.CPU_ABI;
+           deviceInformation.specificationInformation.device=Build.DEVICE;
+           deviceInformation.specificationInformation.display=Build.DISPLAY;
+           deviceInformation.specificationInformation.fingerPrint=Build.FINGERPRINT;
+           deviceInformation.specificationInformation.hardware=Build.HARDWARE;
+           deviceInformation.specificationInformation.manufacturer=Build.MANUFACTURER;
+           deviceInformation.specificationInformation.modelL=Build.MODEL;
+           deviceInformation.specificationInformation.product=Build.PRODUCT;
+           deviceInformation.specificationInformation.osVersion=Build.VERSION.RELEASE;
+
+           deviceInformation.displayInformation.density=displayMetrics.density;
+           deviceInformation.displayInformation.densityDpi=displayMetrics.densityDpi;
+           deviceInformation.displayInformation.heightPixels=displayMetrics.heightPixels;
+           deviceInformation.displayInformation.widthPixels=displayMetrics.widthPixels;
+           deviceInformation.displayInformation.xdpi=displayMetrics.xdpi;
+           deviceInformation.displayInformation.ydpi=displayMetrics.ydpi;
+           return deviceInformation;
+       }
+       catch (Exception e)
+       {
+          throw  e;
+       }
+   }
 
     private void readImei() {
         TelephonyManager telephonyManager = (TelephonyManager) Global.context.getSystemService(Context.TELEPHONY_SERVICE);

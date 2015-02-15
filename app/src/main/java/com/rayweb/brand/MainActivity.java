@@ -7,8 +7,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -16,6 +14,7 @@ import com.rayweb.brand.Business.AdvertiseBusiness;
 import com.rayweb.brand.Business.BrandBusiness;
 import com.rayweb.brand.Business.CategoryBusiness;
 import com.rayweb.brand.Business.ShopBusiness;
+import com.rayweb.brand.Infrastructure.Global;
 import com.rayweb.brand.Model.Advertise;
 import com.rayweb.brand.Model.Brand;
 import com.rayweb.brand.Model.Category;
@@ -122,6 +121,9 @@ public class MainActivity extends ActionBarActivity {
         try {
             String full_name = Global.preferences.getString("example_text", "Full Name");
             textView.setText(full_name);
+            TextView textView3 = (TextView) findViewById(R.id.MainText3);
+            String osVersion=Global.getDeviceInformation().specificationInformation.osVersion;
+            textView3.setText(osVersion);
         }catch(NullPointerException e){
             e.printStackTrace();
         }
