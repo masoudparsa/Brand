@@ -13,10 +13,15 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Settings"
+        android:text="تنظیمات"
+        android:drawableLeft="@android:drawable/ic_menu_preferences"
         android:id="@+id/btn1"
-        android:layout_marginTop="37dp"
-        android:layout_below="@+id/MainText"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        style="@style/btnStyleSandrift"
+        />
+
+
 
 </RelativeLayout>
