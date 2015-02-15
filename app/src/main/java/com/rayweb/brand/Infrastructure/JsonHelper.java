@@ -26,13 +26,27 @@ public class JsonHelper {
         }
 
     }
-
-    public Object getObjectFromJson(String json,Type typeOf)
+    public String getJsonFromObject(Object object, Type type)
     {
         try
         {
-            Gson gson=new Gson();
-            return gson.fromJson(json,typeOf);
+
+            return gson.toJson(object,type);
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+
+    }
+
+    public Object getObjectFromJson(String json,Type type)
+    {
+        try
+        {
+            
+
+            return gson.fromJson(json,type);
         }
         catch (Exception e)
         {
