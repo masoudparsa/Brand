@@ -13,6 +13,7 @@ import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 
 import com.rayweb.brand.Model.DeviceInformation;
 
@@ -24,13 +25,14 @@ import java.util.List;
 public class Global extends Application{
     public static Context context;
     public static SharedPreferences preferences;
+    public static LayoutInflater inflater;
 
     @Override
     public void onCreate() {
         super.onCreate();
         context = getApplicationContext();
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
-
+        inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         String networkStateString = "";
         int networkState = readNetworkStatus();
