@@ -7,7 +7,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.rayweb.brand.Business.AdvertiseBusiness;
@@ -29,12 +31,29 @@ import java.util.List;
 public class MainActivity extends ActionBarActivity {
 
     public ArrayList<StructureAdvertise> advertises = new ArrayList<StructureAdvertise>();
-
+    public ArrayAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ListView listViewAdvertises = (ListView) findViewById(R.id.listViewAdvertises);
+
+        adapter = new AdvertiseAdapter(advertises);
+        listViewAdvertises.setAdapter(adapter);
+
+        for (int i = 0; i < 10; i++) {
+            StructureAdvertise advertise = new StructureAdvertise();
+            advertise.advertise_Title = "برند " + i;
+            advertise.advertise_Description = "توضیحات " + i;
+            advertise.advertise_Favorite = false;
+
+            advertises.add(advertise);
+        }
+
+        adapter.notifyDataSetChanged();
+
         CategoryBusiness categoryBusiness=new CategoryBusiness(this.getBaseContext());
         ShopBusiness shopBusiness =new ShopBusiness(this.getBaseContext());
         BrandBusiness brandBusiness=new BrandBusiness(this.getBaseContext());

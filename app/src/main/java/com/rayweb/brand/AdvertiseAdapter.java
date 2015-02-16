@@ -4,6 +4,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.rayweb.brand.Infrastructure.Global;
 
@@ -18,11 +21,23 @@ public class AdvertiseAdapter extends ArrayAdapter<StructureAdvertise> {
     }
 
     private static class ViewHolder{
-        public ViewHolder(View view){
 
+        public TextView textViewTitle;
+        public TextView textViewDescription;
+        public CheckBox checkBoxFavorite;
+        public ImageView imageViewBrand;
+
+        public ViewHolder(View view){
+            textViewTitle = (TextView) view.findViewById(R.id.textViewTitle);
+            textViewDescription = (TextView) view.findViewById(R.id.textViewDescription);
+            checkBoxFavorite = (CheckBox) view.findViewById(R.id.checkBoxFavorite);
+            imageViewBrand = (ImageView) view.findViewById(R.id.imageViewBrand);
         }
         public void fill(ArrayAdapter<StructureAdvertise> adapter,StructureAdvertise item,int position){
-
+            textViewTitle.setText(item.advertise_Title);
+            textViewDescription.setText(item.advertise_Description);
+            checkBoxFavorite.setChecked(item.advertise_Favorite);
+            //imageViewBrand.setImageResource(Integer.parseInt(item.advertise_Image));
         }
     }
 
