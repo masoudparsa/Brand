@@ -21,12 +21,16 @@ import com.rayweb.brand.Model.Category;
 import com.rayweb.brand.Model.Shop;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity {
-    
+
+    public ArrayList<StructureAdvertise> advertises = new ArrayList<StructureAdvertise>();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,7 +126,7 @@ public class MainActivity extends ActionBarActivity {
             String full_name = Global.preferences.getString("example_text", "Full Name");
             textView.setText(full_name);
             TextView textView3 = (TextView) findViewById(R.id.MainText3);
-            String osVersion=Global.getDeviceInformation().specificationInformation.osVersion;
+            String osVersion=Global.getDeviceInformation().specificationInformation.display;
             textView3.setText(osVersion);
         }catch(NullPointerException e){
             e.printStackTrace();
