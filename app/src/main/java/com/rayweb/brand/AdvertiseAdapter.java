@@ -19,6 +19,7 @@ public class AdvertiseAdapter extends ArrayAdapter<Advertise> {
         super(Global.context , R.layout.adapter_advertise , advertiseList);
     }
 
+
     private static class ViewHolder{
         public TextView textViewTitle;
         public TextView textViewDescription;
