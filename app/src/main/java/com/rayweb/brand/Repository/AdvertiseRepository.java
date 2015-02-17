@@ -53,7 +53,7 @@ public class AdvertiseRepository {
         }
         catch (Exception e)
         {
-
+          throw e;
         }
         return null;
     }
@@ -116,7 +116,8 @@ public class AdvertiseRepository {
         } catch (SQLException e) {
             // TODO: Exception Handling
             e.printStackTrace();
+            return null;
         }
-        return null;
+
     }
 }

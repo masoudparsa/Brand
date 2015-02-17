@@ -11,7 +11,7 @@ import java.util.Date;
 @DatabaseTable(tableName = "Advertises")
 public class Advertise {
 
-    @DatabaseField( columnDefinition = "advertises_ID" ,columnName = "advertises_ID")
+    @DatabaseField( columnDefinition = "advertises_ID" ,id = true,columnName = "advertises_ID")
     public int id;
 
     @DatabaseField(columnDefinition = "advertises_Name",columnName = "advertises_Name")

@@ -7,7 +7,7 @@ import com.j256.ormlite.field.DatabaseField;
  */
 public class AdvertiseImage {
 
-    @DatabaseField( columnDefinition = "advertiseImages_ID" ,columnName = "advertiseImages_ID")
+    @DatabaseField( columnDefinition = "advertiseImages_ID", id=true ,columnName = "advertiseImages_ID")
     public int id;
 
     @DatabaseField(columnDefinition = "advertiseImages_AdvertiseID" ,columnName = "advertiseImages_AdvertiseID", canBeNull = false,foreign = true , foreignColumnName = "advertises_ID")

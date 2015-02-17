@@ -10,13 +10,11 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.rayweb.brand.Business.AdvertiseBusiness;
 import com.rayweb.brand.Business.BrandBusiness;
 import com.rayweb.brand.Business.CategoryBusiness;
 import com.rayweb.brand.Business.ShopBusiness;
-import com.rayweb.brand.Infrastructure.Global;
 import com.rayweb.brand.Model.Advertise;
 import com.rayweb.brand.Model.Brand;
 import com.rayweb.brand.Model.Category;
@@ -38,21 +36,9 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ListView listViewAdvertises = (ListView) findViewById(R.id.listViewAdvertises);
 
-        adapter = new AdvertiseAdapter(advertises);
-        listViewAdvertises.setAdapter(adapter);
 
-        for (int i = 0; i < 10; i++) {
-            StructureAdvertise advertise = new StructureAdvertise();
-            advertise.advertise_Title = "برند " + i;
-            advertise.advertise_Description = "توضیحات " + i;
-            advertise.advertise_Favorite = false;
 
-            advertises.add(advertise);
-        }
-
-        adapter.notifyDataSetChanged();
 
         CategoryBusiness categoryBusiness=new CategoryBusiness(this.getBaseContext());
         ShopBusiness shopBusiness =new ShopBusiness(this.getBaseContext());
@@ -90,7 +76,12 @@ public class MainActivity extends ActionBarActivity {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        List<Shop> shopList= null;
+        try {
+            shopList = shopBusiness.getAllShop();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         Brand brand=new Brand();
         brand.id=1;
         brand.active=true;
@@ -100,7 +91,12 @@ public class MainActivity extends ActionBarActivity {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        List<Brand> brandList= null;
+        try {
+            brandList = brandBusiness.getAllBrand();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         Advertise adv=new Advertise();
         adv.id=1;
         adv.active=true;
@@ -117,16 +113,26 @@ public class MainActivity extends ActionBarActivity {
         adv.registerDate=new Date();
         adv.title="advTitle";
         try {
-            advertiseBusiness.createAdvertiseIfNotExist(adv);
+           Advertise advertise = advertiseBusiness.createAdvertiseIfNotExist(adv);
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        List<Advertise> advertiseList=  advertiseBusiness.getAdvertisesByBrandId(1);
-
-        TextView textView2= (TextView) findViewById(R.id.MainText2);
+        List<Advertise> advertiseList= null;
         try {
-            textView2.setText(advertiseList.get(0).name);
+            advertiseList = advertiseBusiness.getAllAdvertise();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            ListView listViewAdvertises = (ListView) findViewById(R.id.listViewAdvertises);
+
+            adapter = new AdvertiseAdapter(advertiseList);
+            listViewAdvertises.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -140,16 +146,7 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-//        TextView textView = (TextView) findViewById(R.id.MainText2);
-//        try {
-//            String full_name = Global.preferences.getString("example_text", "Full Name");
-//            textView.setText(full_name);
-//            TextView textView3 = (TextView) findViewById(R.id.MainText3);
-//            String osVersion=Global.getDeviceInformation().specificationInformation.display;
-//            textView3.setText(osVersion);
-//        }catch(NullPointerException e){
-//            e.printStackTrace();
-//        }
+
 
     }
 
