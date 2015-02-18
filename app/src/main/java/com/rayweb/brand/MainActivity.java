@@ -74,8 +74,8 @@ public class MainActivity extends ActionBarActivity {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        TextView tv=(TextView) findViewById(R.id.MainText);
-        tv.setText(category.get(0).name);
+        //TextView tv=(TextView) findViewById(R.id.MainText);
+        //tv.setText(category.get(0).name);
 
         Shop shop=new Shop();
         shop.id=1;
@@ -140,16 +140,16 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        TextView textView = (TextView) findViewById(R.id.MainText2);
-        try {
-            String full_name = Global.preferences.getString("example_text", "Full Name");
-            textView.setText(full_name);
-            TextView textView3 = (TextView) findViewById(R.id.MainText3);
-            String osVersion=Global.getDeviceInformation().specificationInformation.display;
-            textView3.setText(osVersion);
-        }catch(NullPointerException e){
-            e.printStackTrace();
-        }
+//        TextView textView = (TextView) findViewById(R.id.MainText2);
+//        try {
+//            String full_name = Global.preferences.getString("example_text", "Full Name");
+//            textView.setText(full_name);
+//            TextView textView3 = (TextView) findViewById(R.id.MainText3);
+//            String osVersion=Global.getDeviceInformation().specificationInformation.display;
+//            textView3.setText(osVersion);
+//        }catch(NullPointerException e){
+//            e.printStackTrace();
+//        }
 
     }
 
