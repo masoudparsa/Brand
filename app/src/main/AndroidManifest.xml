@@ -29,6 +29,10 @@
             android:label="@string/title_activity_settings" >
         </activity>
         <activity
+            android:name=".AdvertiseActivity"
+            android:label="@string/title_activity_advertise" >
+        </activity>
+        <activity
             android:name=".AboutActivity"
             android:label="@string/title_about_settings" >
         </activity>

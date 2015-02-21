@@ -1,5 +1,6 @@
 package com.rayweb.brand.Infrastructure;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -16,7 +17,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 
 import com.rayweb.brand.Model.DeviceInformation;
+import com.rayweb.brand.StructureAdvertise;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,6 +29,9 @@ public class Global extends Application{
     public static Context context;
     public static SharedPreferences preferences;
     public static LayoutInflater inflater;
+    public static Activity currentActivity;
+
+    public static ArrayList<StructureAdvertise> advertises = new ArrayList<StructureAdvertise>();
 
     @Override
     public void onCreate() {

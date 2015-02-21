@@ -15,6 +15,7 @@ import com.rayweb.brand.Business.AdvertiseBusiness;
 import com.rayweb.brand.Business.BrandBusiness;
 import com.rayweb.brand.Business.CategoryBusiness;
 import com.rayweb.brand.Business.ShopBusiness;
+import com.rayweb.brand.Infrastructure.Global;
 import com.rayweb.brand.Model.Advertise;
 import com.rayweb.brand.Model.Brand;
 import com.rayweb.brand.Model.Category;
@@ -28,8 +29,14 @@ import java.util.List;
 
 public class MainActivity extends ActionBarActivity {
 
-    public ArrayList<StructureAdvertise> advertises = new ArrayList<StructureAdvertise>();
+
     public ArrayAdapter adapter;
+
+    @Override
+    protected void onResume() {
+        Global.currentActivity = this;
+        super.onResume();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

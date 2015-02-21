@@ -1,11 +1,13 @@
 package com.rayweb.brand;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.rayweb.brand.Infrastructure.Global;
@@ -22,21 +24,36 @@ public class AdvertiseAdapter extends ArrayAdapter<Advertise> {
 
 
     private static class ViewHolder{
+        public ViewGroup layoutRoot;
         public TextView textViewTitle;
         public TextView textViewDescription;
         public CheckBox checkBoxFavorite;
         public ImageView imageViewBrand;
         public ViewHolder(View view){
 
+            layoutRoot = (ViewGroup) view.findViewById(R.id.layoutAdvertise);
             textViewTitle = (TextView) view.findViewById(R.id.textViewTitle);
             textViewDescription = (TextView) view.findViewById(R.id.textViewDescription);
             checkBoxFavorite = (CheckBox) view.findViewById(R.id.checkBoxFavorite);
             imageViewBrand = (ImageView) view.findViewById(R.id.imageViewBrand);
+
         }
-        public void fill(ArrayAdapter<Advertise> adapter,final Advertise item,int position){
+        public void fill(ArrayAdapter<Advertise> adapter,final Advertise item, final int position){
 
             textViewTitle.setText(item.title);
             textViewDescription.setText(item.description);
+
+            layoutRoot.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //item.title = "Clicked";
+                    //textViewTitle.setText(item.title);
+                    Intent intent = new Intent(Global.currentActivity,AdvertiseActivity.class);
+                    intent.putExtra("POSITION" , position);
+                    Global.currentActivity.startActivity(intent);
+                }
+            });
+
 
            try{
                checkBoxFavorite.setChecked(item.isNew);
