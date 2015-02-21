@@ -35,17 +35,18 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onResume() {
         Global.currentActivity = this;
+
         super.onResume();
+
+        if(adapter != null){
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
-
 
         CategoryBusiness categoryBusiness=new CategoryBusiness(this.getBaseContext());
         ShopBusiness shopBusiness =new ShopBusiness(this.getBaseContext());
@@ -120,69 +121,15 @@ public class MainActivity extends ActionBarActivity {
         adv.registerDate=new Date();
         adv.title="advTitle";
 
-        Advertise adv2=new Advertise();
-        adv.id=1;
-        adv.title="advTitle";
-
-        Advertise adv7=new Advertise();
-        adv.id=17;
-        adv.title="advTitle7";
-        Advertise adv3=new Advertise();
-        adv.id=13;
-        adv.title="advTitle3";
-
-        Advertise adv4=new Advertise();
-        adv.id=12;
-        adv.title="advTitle4";
-
-        Advertise adv5=new Advertise();
-        adv.id=11;
-        adv.title="advTitle5";
-
-        Advertise adv6=new Advertise();
-        adv.id=10;
-        adv.title="advTitle01";
-
-        Advertise adv16=new Advertise();
-        adv.id=105;
-        adv.title="advTitle01";
-
-        Advertise adv116=new Advertise();
-        adv.id=106;
-        adv.title="advTitle01";
-
-        Advertise adv136=new Advertise();
-        adv.id=126;
-        adv.title="advTitle01";
-
-        Advertise adv126=new Advertise();
-        adv.id=136;
-        adv.title="advTitle01";
-
-        Advertise adv166=new Advertise();
-        adv.id=166;
-        adv.title="advTitle01";
-
-        Advertise adv176=new Advertise();
-        adv.id=176;
-        adv.title="advTitle01";
+        Advertise adv2 = new Advertise();
+        adv.id=2;
+        adv.title="advTitle2";
 
 
 
         try {
            Advertise advertise = advertiseBusiness.createAdvertiseIfNotExist(adv);
-              advertise = advertiseBusiness.createAdvertiseIfNotExist(adv2);
-            advertise = advertiseBusiness.createAdvertiseIfNotExist(adv3);
-            advertise = advertiseBusiness.createAdvertiseIfNotExist(adv4);
-            advertise = advertiseBusiness.createAdvertiseIfNotExist(adv5);
-            advertise = advertiseBusiness.createAdvertiseIfNotExist(adv6);
-            advertise = advertiseBusiness.createAdvertiseIfNotExist(adv7);
-            advertise = advertiseBusiness.createAdvertiseIfNotExist(adv16);
-            advertise = advertiseBusiness.createAdvertiseIfNotExist(adv116);
-            advertise = advertiseBusiness.createAdvertiseIfNotExist(adv126);
-            advertise = advertiseBusiness.createAdvertiseIfNotExist(adv136);
-            advertise = advertiseBusiness.createAdvertiseIfNotExist(adv166);
-            advertise = advertiseBusiness.createAdvertiseIfNotExist(adv176);
+           advertise = advertiseBusiness.createAdvertiseIfNotExist(adv2);
 
 
         } catch (SQLException e) {
@@ -212,8 +159,8 @@ public class MainActivity extends ActionBarActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,SettingsActivity.class);
-                MainActivity.this.startActivity(intent);
+                Intent intent = new Intent(Global.currentActivity,SettingsActivity.class);
+                Global.currentActivity.startActivity(intent);
             }
         });
 
