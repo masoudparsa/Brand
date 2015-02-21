@@ -1,5 +1,6 @@
 package com.rayweb.brand;
 
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -32,11 +33,41 @@ public class AdvertiseAdapter extends ArrayAdapter<Advertise> {
             checkBoxFavorite = (CheckBox) view.findViewById(R.id.checkBoxFavorite);
             imageViewBrand = (ImageView) view.findViewById(R.id.imageViewBrand);
         }
-        public void fill(ArrayAdapter<Advertise> adapter,Advertise item,int position){
+        public void fill(ArrayAdapter<Advertise> adapter,final Advertise item,int position){
 
             textViewTitle.setText(item.title);
             textViewDescription.setText(item.description);
-        /*    checkBoxFavorite.setChecked(item.);*/
+
+           try{
+               checkBoxFavorite.setChecked(item.isNew);
+           }catch(Exception e){
+                e.printStackTrace();
+           }
+            checkBoxFavorite.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    CheckBox checkBox = (CheckBox) view;
+                    item.isNew = checkBox.isChecked();
+                    if(item.isNew){
+                        textViewTitle.setTextColor(Color.parseColor("#ff0000"));
+                    }else{
+                        textViewTitle.setTextColor(Color.parseColor("#ffffff"));
+                    }
+                }
+            });
+
+            try {
+                if (item.isNew) {
+                    textViewTitle.setTextColor(Color.parseColor("#ff0000"));
+                } else {
+                    textViewTitle.setTextColor(Color.parseColor("#ffffff"));
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+
+
+
         }
     }
 
