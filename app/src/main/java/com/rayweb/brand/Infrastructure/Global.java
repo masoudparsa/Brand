@@ -10,6 +10,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
@@ -18,7 +19,9 @@ import android.view.LayoutInflater;
 
 import com.rayweb.brand.Model.DeviceInformation;
 import com.rayweb.brand.StructureAdvertise;
+import com.rayweb.brand.TestModuleWebservice;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +34,10 @@ public class Global extends Application{
     public static LayoutInflater inflater;
     public static Activity currentActivity;
 
+    public static final String SDCARD    = Environment.getExternalStorageDirectory().getAbsolutePath();
+    public static final String DIR_APP   = SDCARD + "/testWebserviceModule";
+    public static final String DIR_CACHE = DIR_APP + "/cache";
+
     public static ArrayList<StructureAdvertise> advertises = new ArrayList<StructureAdvertise>();
 
     @Override
@@ -39,6 +46,12 @@ public class Global extends Application{
         context = getApplicationContext();
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
         inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        new File(DIR_APP).mkdirs();
+        new File(DIR_CACHE).mkdirs();
+
+        TestModuleWebservice.test1();
+
 
         String networkStateString = "";
         int networkState = readNetworkStatus();
