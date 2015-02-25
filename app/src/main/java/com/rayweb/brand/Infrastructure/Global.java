@@ -19,7 +19,6 @@ import android.view.LayoutInflater;
 
 import com.rayweb.brand.Model.DeviceInformation;
 import com.rayweb.brand.StructureAdvertise;
-import com.rayweb.brand.TestModuleWebservice;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -49,9 +48,6 @@ public class Global extends Application{
 
         new File(DIR_APP).mkdirs();
         new File(DIR_CACHE).mkdirs();
-
-        TestModuleWebservice.test1();
-
 
         String networkStateString = "";
         int networkState = readNetworkStatus();
